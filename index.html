@@ -3,8 +3,10 @@
 <html>
 <head> 
   <link rel="stylesheet" type="text/css" href="styles.css">
-src="script.js"></script>
-  <title>Chatbot</title>
+
+  <link src="script.js"></script>
+  
+    <title>Chatbot</title>
   <style>
     #chat-window {
       width: 500px;
@@ -86,13 +88,32 @@ src="script.js"></script>
     });
 
     function getResponse(message) {
-      if (message === 'hello') {
-        return 'Hi, how are you?';
-      } else if (message === 'how are you') {
-        return 'I am good, thanks!';
-      } else {
-        return 'I did not understand your message.';
+      const questions = [
+        {
+          "question": "hello",
+          "answer": "Hi, how are you?"
+        },
+        {
+          "question": "how are you",
+          "answer": "I'm doing well, thank you for asking."
+        },
+        {
+          "question": "what is your name",
+          "answer": "My name is AI Assistant."
+        },
+        {
+          "question": "what is the weather like today",
+          "answer": "The weather is sunny today."
+        }
+      ];
+
+      for (let i = 0; i < questions.length; i++) {
+        if (message.toLowerCase() === questions[i].question) {
+          return questions[i].answer;
+        }
       }
+
+      return "I didn't understand your question.";
     }
   </script>
 </body>
