@@ -2,8 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="script.js"></script>
   <title>Chatbot</title>
-  <style>
+  <style> 
     #chat-window {
       width: 500px;
       height: 600px;
@@ -57,10 +59,14 @@
 
     sendButton.addEventListener('click', () => {
       const message = userInput.value;
-      chatLog.innerHTML += `<p>You: ${message}</p>`;
-      userInput.value = '';
-      const response = `AI: ${message}`;
-      chatLog.innerHTML += `<p>${response}</p>`;
+      if (message === '') {
+        chatLog.innerHTML += `<p>Please enter a message</p>`;
+      } else {
+        chatLog.innerHTML += `<p>You: ${message}</p>`;
+        userInput.value = '';
+        const response = getResponse(message);
+        chatLog.innerHTML += `<p>AI: ${response}</p>`;
+      }
     });
 
     userInput.addEventListener('keypress', (e) => {
@@ -68,6 +74,16 @@
         sendButton.click();
       }
     });
+
+    function getResponse(message) {
+      if (message === 'hello') {
+        return 'Hi, how are you?';
+      } else if (message === 'how are you') {
+        return 'I am good, thanks!';
+      } else {
+        return 'I did not understand your message.';
+      }
+    }
   </script>
 </body>
 </html>
