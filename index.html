@@ -1,74 +1,113 @@
-```
 <!DOCTYPE html>
-<html>
-<head> 
-
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Assistant</title>
-    <style>   <link rel="stylesheet" type="text/css" href="styles.css">
+      <link rel="stylesheet" type="text/css" href="styles.css">
 
   <link src="script.js"></script>
 
-        /* Chat interface styling */
+    <title>AI Chat</title>
+    <style>
+        /* Existing styles */
         body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        #chatbox { height: 500px; border: 1px solid #ccc; padding: 20px; overflow-y: auto; margin-bottom: 20px; }
-        .user-msg { background: #e3f2fd; padding: 10px; margin: 5px; border-radius: 10px; text-align: right; }
-        .bot-msg { background: #f0f0f0; padding: 10px; margin: 5px; border-radius: 10px; text-align: left; }
-        #loading { display: none; color: #666; font-style: italic; }
+        #chat-container { border: 1px solid #ccc; border-radius: 5px; padding: 20px; height: 500px; overflow-y: auto; margin-bottom: 20px; }
+        .user-message { background-color: #e3f2fd; padding: 10px; margin: 5px; border-radius: 5px; text-align: right; }
+        .bot-message { background-color: #f5f5f5; padding: 10px; margin: 5px; border-radius: 5px; text-align: left; }
+        .loading { display: none; color: #666; font-style: italic; }
+        
+        /* New button styling */
+        #input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        #send-btn {
+            padding: 12px 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        #send-btn:hover {
+            background-color: #45a049;
+        }
+        #send-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
-    <div id="chatbox"></div>
-    <div id="loading">AI is thinking...</div>
-    <input type="text" id="userInput" placeholder="Ask me anything..." style="width: 100%; padding: 10px;">
+    <div id="chat-container"></div>
+    <div class="loading" id="loading">AI is thinking...</div>
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="send-btn" onclick="sendMessage()">Send</button>
+    </div>
 
     <script>
-        // Client-side code
-        const PROXY_URL = 'https://your-vercel-app.vercel.app/api/chat'; // Replace with your proxy URL
+        // Existing JavaScript code with button integration
+        const API_URL = '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'; // Replace with your URL
 
         async function sendMessage() {
-            const input = document.getElementById('userInput');
-            const message = input.value.trim();
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+            const message = userInput.value.trim();
             
             if (!message) return;
 
-            // Display user message
-            displayMessage(message, 'user');
-            input.value = '';
+            // Disable button during processing
+            sendBtn.disabled = true;
+            userInput.disabled = true;
             
-            // Show loading
+            displayMessage(message, true);
+            userInput.value = '';
             document.getElementById('loading').style.display = 'block';
 
             try {
-                // Get AI response
-                const response = await fetch(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, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: message })
+                    body: JSON.stringify({ message })
                 });
-
+                
                 const data = await response.json();
-                displayMessage(data.reply, 'bot');
+                displayMessage(data.reply, false);
             } catch (error) {
-                displayMessage("Sorry, I'm having trouble connecting. Please try again.", 'bot');
+                displayMessage("Sorry, I'm having trouble connecting. Please try again.", false);
             } finally {
                 document.getElementById('loading').style.display = 'none';
+                sendBtn.disabled = false;
+                userInput.disabled = false;
+                userInput.focus();
             }
         }
 
-        function displayMessage(text, sender) {
-            const chatbox = document.getElementById('chatbox');
-            const div = document.createElement('div');
-            div.className = `${sender}-msg`;
-            div.textContent = text;
-            chatbox.appendChild(div);
-            chatbox.scrollTop = chatbox.scrollHeight;
+        function displayMessage(message, isUser) {
+            const chatContainer = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'user-message' : 'bot-message';
+            messageDiv.textContent = message;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        // Event listeners
-        document.getElementById('userInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
+        // Enter key support
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         });
     </script>
 </body>
