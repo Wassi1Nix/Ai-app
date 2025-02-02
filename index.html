@@ -6,88 +6,66 @@
 
   <link src="script.js"></script>
  
-    <title>AI Chatbot</title>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced AI Chatbot</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        #chat-container {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 20px;
-            height: 500px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-        }
-        .user-message {
-            background-color: #e3f2fd;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            text-align: right;
-        }
-        .bot-message {
-            background-color: #f5f5f5;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            text-align: left;
-        }
-        #input-container {
-            display: flex;
-            gap: 10px;
-        }
-        #user-input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
+        /* Same CSS styles as previous example */
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        #chat-container { border: 1px solid #ccc; border-radius: 5px; padding: 20px; height: 500px; overflow-y: auto; margin-bottom: 20px; }
+        .user-message { background-color: #e3f2fd; padding: 10px; margin: 5px; border-radius: 5px; text-align: right; }
+        .bot-message { background-color: #f5f5f5; padding: 10px; margin: 5px; border-radius: 5px; text-align: left; }
+        #input-container { display: flex; gap: 10px; }
+        #user-input { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .loading { display: none; color: #666; font-style: italic; }
     </style>
 </head>
 <body>
     <div id="chat-container"></div>
+    <div class="loading" id="loading">AI is thinking...</div>
     <div id="input-container">
-        <input type="text" id="user-input" placeholder="Type your message...">
+        <input type="text" id="user-input" placeholder="Ask me anything...">
         <button onclick="sendMessage()">Send</button>
     </div>
 
     <script>
-        // Simple AI response generator
-        function getBotResponse(userInput) {
-            userInput = userInput.toLowerCase();
-            
-            // Add your custom responses here
-            const responses = {
-                'hello': 'Hello! How can I help you today?',
-                'how are you': 'I\'m just a program, but thanks for asking!',
-                'bye': 'Goodbye! Have a great day!',
-                'help': 'I can help you with basic information. Try asking me something!',
-                'default': 'I\'m still learning. Could you please rephrase that?'
-            };
+        // Replace with your OpenAI API key
+        const API_KEY = 'sk-your-openai-api-key-here';
+        const API_URL = 'https://api.openai.com/v1/chat/completions';
 
-            // Check for matching responses
-            for (const [keyword, response] of Object.entries(responses)) {
-                if (userInput.includes(keyword)) {
-                    return response;
-                }
+        async function getAIResponse(userInput) {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "gpt-3.5-turbo",
+                        messages: [{
+                            role: "user",
+                            content: userInput
+                        }],
+                        temperature: 0.7
+                    })
+                });
+
+                const data = await response.json();
+                return data.choices[0].message.content;
+            } catch (error) {
+                console.error('Error:', error);
+                return "Sorry, I'm having trouble understanding. Please try again.";
+            } finally {
+                document.getElementById('loading').style.display = 'none';
             }
-
-            return responses['default'];
         }
 
         function displayMessage(message, isUser = true) {
@@ -99,30 +77,32 @@
             chatContainer.scrollTop = chatContainer.scrollHeight;
         }
 
-        function sendMessage() {
+        async function sendMessage() {
             const userInput = document.getElementById('user-input');
             const message = userInput.value.trim();
             
             if (message) {
                 displayMessage(message, true);
-                // Simulate AI processing time
-                setTimeout(() => {
-                    const botResponse = getBotResponse(message);
-                    displayMessage(botResponse, false);
-                }, 1000);
                 userInput.value = '';
+                
+                try {
+                    const botResponse = await getAIResponse(message);
+                    displayMessage(botResponse, false);
+                } catch (error) {
+                    displayMessage("Error connecting to AI service", false);
+                }
             }
         }
 
-        // Allow Enter key to send message
+        // Enter key support
         document.getElementById('user-input').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
             }
         });
 
-        // Initial bot message
-        displayMessage('Hello! How can I help you today?', false);
+        // Initial message
+        displayMessage("Hi! I'm an AI assistant. Ask me anything!", false);
     </script>
 </body>
 </html>
