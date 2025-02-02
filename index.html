@@ -5,110 +5,124 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 
   <link src="script.js"></script>
-  
-    <title>Chatbot</title>
-  <style>
-    #chat-window {
-      width: 500px;
-      height: 600px;
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin: 20px auto;
-      background-color: #fff;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    #chat-log {
-      padding: 10px;
-    }
-
-    #user-input {
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-    }
-
-    #send-button {
-      width: 100%;
-      height: 40px;
-      padding: 10px;
-      font-size: 16px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    #send-button:hover {
-      background-color: #444;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  </style>
+ 
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #chat-container {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            height: 500px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        .user-message {
+            background-color: #e3f2fd;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: #f5f5f5;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        #input-container {
+            display: flex;
+            gap: 10px;
+        }
+        #user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-  <h1>Chatbot</h1>
-  <div id="chat-window">
-    <input id="user-input" type="text" placeholder="Type a message...">
-    <button id="send-button">Send</button>
-    <div id="chat-log"></div>
-  </div>
-  <script>
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
+    <div id="chat-container"></div>
+    <div id="input-container">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 
-    sendButton.addEventListener('click', () => {
-      const message = userInput.value;
-      if (message === '') {
-        chatLog.innerHTML += `<p>Please enter a message</p>`;
-      } else {
-        chatLog.innerHTML += `<p>You: ${message}</p>`;
-        userInput.value = '';
-        const response = getResponse(message);
-        chatLog.innerHTML += `<p>AI: ${response}</p>`;
-      }
-    });
+    <script>
+        // Simple AI response generator
+        function getBotResponse(userInput) {
+            userInput = userInput.toLowerCase();
+            
+            // Add your custom responses here
+            const responses = {
+                'hello': 'Hello! How can I help you today?',
+                'how are you': 'I\'m just a program, but thanks for asking!',
+                'bye': 'Goodbye! Have a great day!',
+                'help': 'I can help you with basic information. Try asking me something!',
+                'default': 'I\'m still learning. Could you please rephrase that?'
+            };
 
-    userInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        sendButton.click();
-      }
-    });
+            // Check for matching responses
+            for (const [keyword, response] of Object.entries(responses)) {
+                if (userInput.includes(keyword)) {
+                    return response;
+                }
+            }
 
-    function getResponse(message) {
-      const questions = [
-        {
-          "question": "hello",
-          "answer": "Hi, how are you?"
-        },
-        {
-          "question": "how are you",
-          "answer": "I'm doing well, thank you for asking."
-        },
-        {
-          "question": "what is your name",
-          "answer": "My name is AI Assistant."
-        },
-        {
-          "question": "what is the weather like today",
-          "answer": "The weather is sunny today."
+            return responses['default'];
         }
-      ];
 
-    }
-  </script>
+        function displayMessage(message, isUser = true) {
+            const chatContainer = document.getElementById('chat-container');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'user-message' : 'bot-message';
+            messageDiv.textContent = message;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                displayMessage(message, true);
+                // Simulate AI processing time
+                setTimeout(() => {
+                    const botResponse = getBotResponse(message);
+                    displayMessage(botResponse, false);
+                }, 1000);
+                userInput.value = '';
+            }
+        }
+
+        // Allow Enter key to send message
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initial bot message
+        displayMessage('Hello! How can I help you today?', false);
+    </script>
 </body>
 </html>
-```
