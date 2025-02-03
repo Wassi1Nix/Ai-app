@@ -1,73 +1,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-      <link src="styles.css"></script>
-        <link src="script.js"></script>
-<link src="node.js"></script
+      <link src="style.css"></script>
+  <title>RDP Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+    .login-form {
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .login-form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .login-form input[type="text"], .login-form input[type="password"] {
+      width: 100%;
+      height: 40px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .login-form input[type="submit"] {
+      width: 100%;
+      height: 40px;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .login-form input[type="submit"]:hover {
+      background-color: #3e8e41;
+    }
   </style>
 </head>
 <body>
-  <h1>AI Chatbot</h1>
-  <div id="chat-window">
-    <input id="user-input" type="text" placeholder="Type a message...">
-    <button id="send-button">Send</button>
-    <div id="chat-log"></div>
+  <div class="login-form">
+    <h2>RDP Login</h2>
+    <form>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username"><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password"><br><br>
+      <label for="host">Host:</label>
+      <input type="text" id="host" name="host" placeholder="Enter the RDP host"><br><br>
+      <label for="port">Port:</label>
+      <input type="text" id="port" name="port" placeholder="Enter the RDP port"><br><br>
+      <input type="submit" value="Login">
+    </form>
   </div>
-  <script>
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
-
-    sendButton.addEventListener('click', () => {
-      const message = userInput.value;
-      if (message === '') {
-        chatLog.innerHTML += `<p>Please enter a message</p>`;
-      } else {
-        chatLog.innerHTML += `<p>You: ${message}</p>`;
-        userInput.value = '';
-        const response = getResponse(message);
-        chatLog.innerHTML += `<p>AI: ${response}</p>`;
-      }
-    });
-
-    userInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        sendButton.click();
-      }
-    });
-
-    function getResponse(message) {
-      const questions = [
-        {
-          'question': 'what is your name',
-          'answer': 'My name is AI Chatbot.'
-        },
-        {
-          'question': 'how are you',
-          'answer': 'I\'m doing well, thank you for asking.'
-        },
-        {
-          'question': 'what is the weather like today',
-          'answer': 'The weather is sunny today.'
-        },
-        // Add more questions and answers here
-      ];
-
-      let response = '';
-
-      for (const question of questions) {
-        if (message.toLowerCase().includes(question.question)) {
-          response = question.answer;
-          break;
-        }
-      }
-
-      if (response === '') {
-        response = 'I didn\'t understand your question. Can you please rephrase?';
-      }
-
-      return response;
-    }
-  </script>
 </body>
 </html>
+```
+This code creates a simple login form with input fields for the username, password, host, and port. The form is styled with CSS to make it look more visually appealing.
+
+You can customize the code to fit your needs, such as changing the colors, fonts, and layout. Let me know if you have any questions or need further assistance!
