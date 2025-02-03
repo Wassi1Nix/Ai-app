@@ -2,122 +2,105 @@
 <html>
 <head>
       <link src="style.css"></script>
-
-    <meta charset="utf-8">
-    <title>Facebook - Log In or Sign Up</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
-        }
-        
-        #header {
-            background-color: #3b5998;
-            height: 82px;
-            padding: 0 20%;
-        }
-        
-        #logo {
-            font-size: 40px;
-            color: white;
-            font-weight: bold;
-            padding-top: 20px;
-            float: left;
-        }
-        
-        #login-form {
-            float: right;
-            margin-top: 15px;
-            color: white;
-        }
-        
-        .input-field {
-            padding: 3px;
-            margin: 2px;
-            border: 1px solid #1d2a5b;
-        }
-        
-        #login-button {
-            background-color: #4267b2;
-            border: 1px solid #29487d;
-            color: white;
-            padding: 3px 6px;
-            font-weight: bold;
-            margin-left: 10px;
-        }
-        
-        #main-content {
-            width: 980px;
-            margin: 0 auto;
-            padding-top: 50px;
-        }
-        
-        .signup-box {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 15px;
-            width: 400px;
-            margin-top: 20px;
-        }
-        
-        .signup-input {
-            width: 190px;
-            padding: 5px;
-            margin: 3px 0;
-        }
-    </style>
+      font-family: Arial, sans-serif;
+    }
+    #chat-window {
+      width: 500px;
+      height: 600px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #chat-log {
+      padding: 10px;
+    }
+    #user-input {
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+    #send-button {
+      width: 100%;
+      height: 40px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #send-button:hover {
+      background-color: #444;
+    }
+  </style>
 </head>
 <body>
-    <div id="header">
-        <div id="logo">facebook</div>
-        <div id="login-form">
-            <form>
-                <label>Email or Phone</label>
-                <input type="text" class="input-field">
-                <label>Password</label>
-                <input type="password" class="input-field">
-                <input type="submit" value="Log In" id="login-button">
-                <br>
-                <a href="#" style="color: #9cb4d8; font-size: 12px;">Forgotten account?</a>
-            </form>
-        </div>
-    </div>
+  <h1>AI Chatbot</h1>
+  <div id="chat-window">
+    <input id="user-input" type="text" placeholder="Type a message...">
+    <button id="send-button">Send</button>
+    <div id="chat-log"></div>
+  </div>
+  <script>
+    const chatLog = document.getElementById('chat-log');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
 
-    <div id="main-content">
-        <h2>Connect with friends and the<br>world around you on Facebook.</h2>
-        
-        <div class="signup-box">
-            <h1>Sign Up</h1>
-            <p>It's free and always will be.</p>
-            <form>
-                <input type="text" placeholder="First name" class="signup-input" style="margin-right: 10px;">
-                <input type="text" placeholder="Last name" class="signup-input"><br>
-                <input type="text" placeholder="Email or mobile number" class="signup-input" style="width: 395px;"><br>
-                <input type="text" placeholder="Re-enter email or mobile number" class="signup-input" style="width: 395px;"><br>
-                <input type="password" placeholder="New password" class="signup-input" style="width: 395px;"><br>
-                
-                <p style="font-size: 16px;">Birthday</p>
-                <select>
-                    <option>Month</option>
-                </select>
-                <select>
-                    <option>Day</option>
-                </select>
-                <select>
-                    <option>Year</option>
-                </select>
-                
-                <p style="font-size: 16px;">Gender</p>
-                <input type="radio" name="gender"> Female
-                <input type="radio" name="gender"> Male
-                
-                <p style="font-size: 11px; color: #777;">By clicking Sign Up, you agree to our Terms and that you have read our Data Use Policy, including our Cookie Use.</p>
-                
-                <input type="submit" value="Sign Up" style="background-color: #69a74e; color: white; padding: 7px 20px; border: 1px solid #3b6e22; font-size: 16px; font-weight: bold;">
-            </form>
-        </div>
-    </div>
+    sendButton.addEventListener('click', () => {
+      const message = userInput.value;
+      if (message === '') {
+        chatLog.innerHTML += `<p>Please enter a message</p>`;
+      } else {
+        chatLog.innerHTML += `<p>You: ${message}</p>`;
+        userInput.value = '';
+        const response = getResponse(message);
+        chatLog.innerHTML += `<p>AI: ${response}</p>`;
+      }
+    });
+
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendButton.click();
+      }
+    });
+
+    function getResponse(message) {
+      const questions = [
+        {
+          'question': 'what is your name',
+          'answer': 'My name is AI Chatbot.'
+        },
+        {
+          'question': 'how are you',
+          'answer': 'I\'m doing well, thank you for asking.'
+        },
+        {
+          'question': 'what is the weather like today',
+          'answer': 'The weather is sunny today.'
+        },
+        // Add more questions and answers here
+      ];
+
+      let response = '';
+
+      for (const question of questions) {
+        if (message.toLowerCase().includes(question.question)) {
+          response = question.answer;
+          break;
+        }
+      }
+
+      if (response === '') {
+        response = 'I didn\'t understand your question. Can you please rephrase?';
+      }
+
+      return response;
+    }
+  </script>
 </body>
 </html>
