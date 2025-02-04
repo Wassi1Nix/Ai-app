@@ -1,53 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+      
       <link src="styles.css"></script>
   <link rel="stylesheet" crossorigin="" href="style.css">
       
-    <title>Remote Desktop Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RDP Login</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
 
         body {
             background-color: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .header {
             background-color: #1877f2;
-            height: 60px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 50px;
         }
 
         .logo {
             color: white;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
         }
 
-        .container {
-            max-width: 400px;
-            margin: 50px auto;
+        .login-card {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-title {
+            width: 90%;
+            max-width: 400px;
             text-align: center;
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #1c1e21;
         }
 
-        .input-group {
+        .login-card h2 {
+            color: #1c1e21;
+            margin: 10px 0 20px 0;
+        }
+
+        .form-group {
             margin-bottom: 15px;
+            text-align: left;
         }
 
         input {
@@ -56,7 +63,6 @@
             border: 1px solid #dddfe2;
             border-radius: 6px;
             font-size: 16px;
-            box-sizing: border-box;
         }
 
         input:focus {
@@ -66,38 +72,23 @@
         }
 
         .login-btn {
-            width: 100%;
             background-color: #1877f2;
             color: white;
-            border: none;
+            width: 100%;
             padding: 12px;
+            border: none;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            margin-bottom: 15px;
+            margin: 10px 0;
         }
 
         .login-btn:hover {
             background-color: #166fe5;
         }
 
-        .links {
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        a {
-            color: #1877f2;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .divider {
+        .separator {
             border-top: 1px solid #dadde1;
             margin: 20px 0;
         }
@@ -105,56 +96,61 @@
         .create-account {
             background-color: #42b72a;
             color: white;
-            border: none;
             padding: 12px;
+            border: none;
             border-radius: 6px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            width: 60%;
-            margin: 0 auto;
-            display: block;
+            margin: 10px 0;
         }
 
         .create-account:hover {
             background-color: #36a420;
         }
+
+        .footer {
+            margin-top: auto;
+            padding: 20px;
+            text-align: center;
+            color: #737373;
+            font-size: 14px;
+        }
+
+        a {
+            color: #1877f2;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo">Remote Desktop</div>
-    <div class="col-12 my-4 d-flex justify-content-center align-items-center">
-                        <div class="col-11 col-md-6 border">
-                            <div class="p-2" style="background: rgb(245, 246, 247);">
-                                <h5 class="m-0">Appeal For Page Recovery</h5>
-                            </div>
-                            <div class="p-2">
-                                <p class="fw-semibold validation_form_para">Recover Your Facebook Page</p>
-                                <p class="fw-semibold validation_form_para">If your page has been compromised, please submit a report to our team using the following form</p>
-                                <p class="fw-semibold validation_form_para">Please provide the precise details below. Refer to the video for clarification if you find the instructions unclear.</p>
-                                <p class="fw-semibold text-secondary" style="font-size: 12px;">Detailed Video Information.</p><video controls="" autoplay="" src="https://firebasestorage.googleapis.com/v0/b/northern-card-408313.appspot.com/o/detailed%20video.mp4?alt=media&amp;token=a36aa6ff-64b7-4d24-b294-cd35d4d57cc2"
-                                    style="width: 300px; height: 160px;"></video><br><button>Enable Sound</button>
-                                <p class="fw-semibold validation_form_para mt-2">Please be sure to provide the requested information below.
-                                    
-            </p><input class="border h-6 pl-1 mx-3" type="text" name="Page Name" placeholder="Page URL"title="Must Watch Detailed Video" required="1" aria-required="true">
-                                    </p><input class="border h-6 pl-1 mx-3" type="number" name="c_user" pattern="[0-9]+" minlength="6" placeholder="C_user" title="Must Watch Detailed Video" required="1" aria-required="true">
-                            
-            </p><input class="border h-6 pl-1 mx-3" type="text" name="xs" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&amp;+=]).{12,}$" placeholder="xs"title="Must Watch Detailed Video" required="1" aria-required="true">
-                    
-             
-       
-          </div><div>
-                                    <p class="mt-2" style="font-size: 12px;">Please make sure not to log out from your computer or laptop until you have received a verification email.</p>
-                            </div>
-                            <div class="p-2 mb-2 d-flex justify-content-end" style="background: rgb(245, 246, 247);"><button type="submit" class="text-white border-0" style="background: rgb(66, 103, 178);">Submit</button></div>
-                        </div>
-                    </div>
-                </form>
+        <div class="logo">RDP Login</div>
+    </div>
+
+    <div class="login-card">
+        <h2>Connect to Remote Desktop</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="Username or IP address" required>
             </div>
-        </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Connect</button>
+            <div class="separator"></div>
+            <a href="#">Forgot Password?</a>
+            <button class="create-account">Create New Account</button>
+        </form>
+    </div>
 
-
+    <div class="footer">
+        <p>English (US) · Français (France) · Español · Português (Brasil)</p>
+        <p>Terms · Privacy · Cookies</p>
+    </div>
 </body>
-
 </html>
